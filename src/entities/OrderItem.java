@@ -4,16 +4,14 @@ public class OrderItem {
 	
 	private Integer quantity;
 	private Double price;
-	private Double subtotal;
-	
+		
 	public OrderItem(){
 		}
 
-	public OrderItem(Integer quantity, Double price, Double subtotal) {
+	public OrderItem(Integer quantity, Double price) {
 		this.quantity = quantity;
 		this.price = price;
-		this.subtotal = subtotal;
-	}
+			}
 
 	public Integer getQuantity() {
 		return quantity;
@@ -31,14 +29,14 @@ public class OrderItem {
 		this.price = price;
 	}
 
-	public Double getSubtotal() {
-		return subtotal;
-	}
-
+	
 	public static void add(OrderItem item) {
 				
 	}
-	
+	public Double Subtotal() {
+		return price * quantity;
+	}
+
 	
 
 }

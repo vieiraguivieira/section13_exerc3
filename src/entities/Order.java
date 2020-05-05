@@ -58,4 +58,9 @@ public class Order {
 		items.add(item);
 	}
 
+	@Override
+	public String toString() {
+		return "Order [moment=" + moment + ", status=" + status + ", total=" + total + ", items=" + items + "]";
+	}
+
 }
