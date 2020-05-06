@@ -1,10 +1,15 @@
 package entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OrderItem {
 	
 	private Integer quantity;
 	private Double price;
 		
+	List<Product> products = new ArrayList<>();
+	
 	public OrderItem(){
 		}
 
@@ -12,6 +17,13 @@ public class OrderItem {
 		this.quantity = quantity;
 		this.price = price;
 			}
+
+	public static void add(OrderItem item) {
+				
+	}
+	public Double Subtotal() {
+		return price * quantity;
+	}
 
 	public Integer getQuantity() {
 		return quantity;
@@ -29,14 +41,12 @@ public class OrderItem {
 		this.price = price;
 	}
 
-	
-	public static void add(OrderItem item) {
-				
+	public List<Product> getProduct() {
+		return products;
 	}
-	public Double Subtotal() {
-		return price * quantity;
-	}
-
 	
+	public void addProduct(Product product) {
+		products.add(product);
+	}
 
 }

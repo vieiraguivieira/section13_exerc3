@@ -20,7 +20,6 @@ public class Order {
 	}
 
 	public Order(Date moment, OrderStatus status, Double total) {
-		super();
 		this.moment = moment;
 		this.status = status;
 		this.total = total;
