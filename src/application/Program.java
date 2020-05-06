@@ -20,48 +20,49 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 
 		SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
-		SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		double total = 0;
-		Date moment = new Date();
 		
 		System.out.println("Enter client data:");
 		System.out.print("Name: ");
 		String name = sc.next();
 		System.out.print("Email: ");
+		sc.nextLine();
 		String email = sc.next();
 		System.out.print("Birth date (DD/MM/YYYY): ");
 		Date bday = sdf1.parse(sc.next());
+
+		Client client = new Client(name, email, bday);
+
 		System.out.println("Enter order data: ");
 		System.out.print("Status: ");
-		OrderStatus os = OrderStatus.valueOf(sc.next().toUpperCase());
-		Client client = new Client(name, email, bday);
-		Order order = new Order(moment, os, total);
+		OrderStatus os = OrderStatus.valueOf(sc.next());
+
+		Order order = new Order(new Date(), os, client);
 
 		System.out.print("How many items to this order? ");
 		int n = sc.nextInt();
-
 		for (int i = 1; i <= n; i++) {
 			System.out.println("Enter #" + i + " item data:");
 			System.out.print("Product name: ");
 			String productName = sc.next();
 			System.out.print("Product price: ");
 			double price = sc.nextDouble();
+
 			Product product = new Product(productName, price);
+
 			System.out.print("Quantity: ");
 			int quantity = sc.nextInt();
-			OrderItem orderItem = new OrderItem(quantity, price);
-			orderItem.addProduct(product);
-			total += price * quantity;
+
+			OrderItem orderItem = new OrderItem(quantity, price, product);
+
 			order.addOrderItem(orderItem);
-			System.out.println();
+
 		}
-			// instanciar pedido
 
-		// fazer for para: //instanciar produtos //instanciar produtos com pedido
-		
-		//arrumar a lista. 
+		System.out.println();
+		System.out.println("Order summary:");
+		System.out.println(order);
 
-		System.out.println(total); //só pra testar
+		sc.close();
 	}
 
 }

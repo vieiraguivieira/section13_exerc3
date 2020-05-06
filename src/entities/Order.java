@@ -1,28 +1,26 @@
 package entities;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import entities.enums.OrderStatus;
-import entities.OrderItem;
 
 public class Order {
 	
 	private Date moment;
 	private OrderStatus status;
-	private Double total;
 	
-	List<OrderItem> items = new ArrayList<>();
+	private Client client;
+	private List<OrderItem> items = new ArrayList<>();
 	
-	public Order() {
-		
-	}
-
-	public Order(Date moment, OrderStatus status, Double total) {
+	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	
+	public Order(Date moment, OrderStatus status, Client client) {
 		this.moment = moment;
 		this.status = status;
-		this.total = total;
+		this.client = client;
 	}
 
 	public Date getMoment() {
@@ -41,12 +39,12 @@ public class Order {
 		this.status = status;
 	}
 
-	public Double getTotal() {
-		return total;
+	public Client getClient() {
+		return client;
 	}
 
-	public void setTotal(Double total) {
-		this.total = total;
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 	public List<OrderItem> getOrderItem() {
@@ -56,10 +54,33 @@ public class Order {
 	public void addOrderItem(OrderItem item) {
 		items.add(item);
 	}
+	public double total() {
+		double sum = 0.0;
+				for (OrderItem item : items) {
+					sum += item.subTotal();
+				}
+		return sum;
+	}
 
 	@Override
 	public String toString() {
-		return "Order [moment=" + moment + ", status=" + status + ", total=" + total + ", items=" + items + "]";
+		StringBuilder sb = new StringBuilder();
+		sb.append("Order moment: ");
+		sb.append(sdf.format(moment) + "\n");
+		sb.append("Order status: ");
+		sb.append(status + "\n");
+		sb.append("Client: ");
+		sb.append(client + "\n");
+		sb.append("Order items:\n");
+		for (OrderItem o : items) {
+			sb.append(o + "\n");
+		}
+		sb.append("Total price: $");
+		sb.append(String.format("%.2f", total()));
+		
+			return sb.toString();
 	}
+	
+	
 
 }
